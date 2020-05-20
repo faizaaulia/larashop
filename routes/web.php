@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
+
+// hapus route register
+Route::match(['get', 'post'], '/register', function () {
+    return redirect('/login');
+})->name('register');
 
 Route::get('/home', 'HomeController@index')->name('home');
