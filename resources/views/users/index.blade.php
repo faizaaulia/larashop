@@ -21,12 +21,14 @@
                     <td>{{ $user->email }}</td>
                     <td>
                         @if ($user->avatar)
-                            <img src="{{ asset('storage/' . $user->avatar) }}" alt="{{ $user->avatar }}" width="70px">                            
+                            <img src="{{ asset('storage/' . $user->avatar) }}" alt="avatar" width="70px">                            
                         @else
                             No Photo
                         @endif
                     </td>
-                    <td>TODO: actions</td>
+                    <td>
+                        <a href="{{ route('users.edit', [$user->id]) }}" class="btn btn-info text-white btn-sm">Edit</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
