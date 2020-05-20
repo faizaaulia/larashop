@@ -11,9 +11,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = \App\User::paginate(10);
+
+        $filterKeyword = $request->get('keyword');
+        if ($filterKeyword)
+            $users = \App\User::where('email', 'LIKE', "%$filterKeyword%")->paginate(10);
 
         return view('users.index', ['users' => $users]);
     }
@@ -63,7 +67,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = \App\User::findOrFail($id);
+
+        return view('users.show', ['user' => $user]);
     }
 
     /**
@@ -116,6 +122,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = \App\User::findOrFail($id);
+
+        if ($user->avatar && file_exists(storage_path('app/public/' . $user->avatar)))
+            \Storage::delete('public/' . $user->avatar);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('status', 'User successfully deleted');
     }
 }
