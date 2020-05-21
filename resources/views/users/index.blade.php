@@ -9,21 +9,25 @@
         </div>
     @endif
 
-    <div class="row">
-        <div class="col-md-6">
-            <form action="{{ route('users.index') }}">
-                <div class="input-group mb-3">
-                    <input type="text" name="keyword" id="keyword" value="{{ Request::get('keyword') }}" class="form-control col-md-10" placeholder="Filter by email">
-                    <div class="input-group-append">
-                        <input type="submit" value="Filter" class="btn btn-primary">
-                    </div>
-                </div>
-            </form>
+    <form action="{{ route('users.index') }}">
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <input type="text" name="keyword" id="keyword" value="{{ Request::get('keyword') }}" class="form-control" placeholder="Filter by email">
+            </div>
+            <div class="col-md-4">
+                <input type="radio" name="status" id="active" value="ACTIVE" {{ Request::get('status') == 'ACTIVE' ? 'checked' : '' }} class="form-control">
+                <label for="active">Active</label>
+
+                <input type="radio" name="status" id="inactive" value="INACTIVE" {{ Request::get('status') == 'INACTIVE' ? 'checked' : '' }} class="form-control">
+                <label for="inactive">Inactive</label>
+
+                <input type="submit" value="Filter" class="btn btn-primary">
+            </div>
+            <div class="col-md-4 text-right">
+                <a href="{{ route('users.create') }}" class="btn btn-primary">Create User</a>
+            </div>
         </div>
-        <div class="col-md-6 text-right">
-            <a href="{{ route('users.create') }}" class="btn btn-primary">Create User</a>
-        </div>
-    </div>
+    </form>
 
     <table class="table shadow-0">
         <thead>
@@ -32,6 +36,7 @@
                 <th><b>Username</b></th>
                 <th><b>Email</b></th>
                 <th><b>Avatar</b></th>
+                <th><b>Status</b></th>
                 <th><b>Actions</b></th>
             </tr>
         </thead>
@@ -49,6 +54,9 @@
                         @endif
                     </td>
                     <td>
+                        <span class="badge badge{{ $user->status == 'ACTIVE' ? '-success' : '-danger' }}">{{ $user->status }}</span>
+                    </td>
+                    <td>
                         <a href="{{ route('users.show', [$user->id]) }}" class="btn btn-primary btn-sm">Detail</a>
                         <a href="{{ route('users.edit', [$user->id]) }}" class="btn btn-info text-white btn-sm">Edit</a>
                         <form action="{{ route('users.destroy', [$user->id]) }}" method="post" class="d-inline" onsubmit="return confirm('Delete user permanently?')">
@@ -60,5 +68,11 @@
                 </tr>
             @endforeach
         </tbody>
+        <tfoot>
+            <tr>
+                {{-- {{$users->links()}} --}}
+                <td colspan="10"> {{ $users->appends(Request::all())->links() }} </td>
+            </tr>
+        </tfoot>
     </table>
 @endsection
