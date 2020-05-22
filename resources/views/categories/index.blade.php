@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <form action="{{ route('categories.index') }}">
                 <div class="input-group">
                     <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Filter by category name">
@@ -14,8 +14,8 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-4">
-            <ul class="nav nav-pills card-header-pills">
+        <div class="col-md-6">
+            <ul class="nav nav-pills card-header-pills float-left">
                 <li class="nav-item">
                     <a href="{{ route('categories.index') }}" class="nav-link active">Published</a>
                 </li>
@@ -23,9 +23,7 @@
                     <a href="{{ route('categories.trash') }}" class="nav-link">Trash</a>
                 </li>
             </ul>
-        </div>
-        <div class="col-md-4 text-right">
-            <a href="{{ route('categories.create') }}" class="btn btn-primary">Create Category</a>
+            <a href="{{ route('categories.create') }}" class="btn btn-primary float-right">Create Category</a>
         </div>
     </div>
     <hr class="my-3">

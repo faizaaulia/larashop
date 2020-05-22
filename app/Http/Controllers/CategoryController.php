@@ -160,4 +160,12 @@ class CategoryController extends Controller
             return redirect()->route('categories.index')->with('status-success', 'Category permanently deleted');
         }
     }
+
+    //search category ajax endpoint
+    public function ajaxSearch(Request $request) {
+        $keyword = $request->get('q');
+        $categories = \App\Category::where('name', 'LIKE', "%$keyword%")->get();
+
+        return $categories;
+    }
 }

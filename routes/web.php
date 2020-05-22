@@ -32,7 +32,10 @@ Route::get('/categories/trash', 'CategoryController@trash')->name('categories.tr
 
 Route::get('/categories/{id}/restore', 'CategoryController@restore')->name('categories.restore');
 
-
 Route::delete('/categories/{id}/delete-permanent', 'CategoryController@deletePermanent')->name('categories.delete-permanent');
 
 Route::resource('categories', 'CategoryController');
+
+Route::resource('books', 'BookController');
+
+Route::get('ajax/categories/search', 'CategoryController@ajaxSearch')->name('categories.ajax.search');
