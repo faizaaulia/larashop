@@ -59,10 +59,13 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('categories.restore', [$category->id]) }}" class="btn btn-success btn-sm">Restore</a>
+                                <form action="{{ route('categories.restore', [$category->id]) }}" method="post" class="d-inline">
+                                    @csrf
+                                    <input type="submit" value="Restore" class="btn btn-success btn-sm">
+                                </form>
                                 <form action="{{ route('categories.delete-permanent', [$category->id]) }}" method="post" class="d-inline" onsubmit="return confirm('Delete category permanenty?')">
                                     @csrf
-                                    <input type="hidden" name="_method" value="DELETe">
+                                    <input type="hidden" name="_method" value="DELETE">
                                     <input type="submit" value="Delete" class="btn btn-danger btn-sm">
                                 </form>
                             </td>
