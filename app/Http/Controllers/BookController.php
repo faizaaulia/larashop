@@ -56,7 +56,7 @@ class BookController extends Controller
 
         if ($request->file('cover')) {
             $cover = $request->file('cover')
-                             ->store('books_cover', 'public');
+                             ->store('book_covers', 'public');
             $book->cover = $cover;
         }
 
