@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->float('total_price')->unsigned()->defaults(0);
             $table->string('invoice_number');
-            $table->enum('string', ['SUBMIT', 'PROCESS', 'FINISH', 'CANCEL']);
+            $table->enum('status', ['SUBMIT', 'PROCESS', 'FINISH', 'CANCEL']);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
