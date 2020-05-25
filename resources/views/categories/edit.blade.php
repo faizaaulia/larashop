@@ -13,7 +13,10 @@
             @csrf
             <input type="hidden" name="_method" value="PUT">
             <label for="name">Category Name</label> <br>
-            <input type="text" name="name" id="name" class="form-control" value="{{ $category->name }}"> <br>
+            <input type="text" name="name" id="name" class="form-control {{ $errors->first('name') ? 'is-invalid' : '' }}" value="{{ old('name') ? old('name') : $category->name }}"> 
+            <div class="invalid-feedback">
+                {{ $errors->first('name') }}
+            </div> <br>
 
             <label for="name">Category Slug</label> <br>
             <input type="text" name="slug" id="slug" class="form-control" value="{{ $category->slug }}" disabled> <br>
@@ -24,7 +27,10 @@
             @endif
 
             <label for="image">Category Image</label> <br>
-            <input type="file" name="image" id="image" class="form-control">
+            <input type="file" name="image" id="image" class="form-control {{ $errors->first('image') ? 'is-invalid' : '' }}">
+            <div class="invalid-feedback">
+                {{ $errors->first('image') }}
+            </div>
             <small class="text-muted">Kosongkan jika tidak ingin mengubah</small> <br><br>
 
             <input type="submit" value="Save" class="btn btn-primary">

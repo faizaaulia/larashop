@@ -60,7 +60,10 @@
                 @else
                     No Avatar
                 @endif <br>
-                <input type="file" name="avatar" id="avatar" class="form-control">
+                <input type="file" name="avatar" id="avatar" class="form-control {{ $errors->first('avatar') ? 'is-invalid' : '' }}">
+                <div class="invalid-feedback">
+                    {{ $errors->first('avatar') }}
+                </div>
                 <small class="text-muted">Kosongkan jika tidak ingin mengubah avatar</small>
         
                 <hr class="my-3">

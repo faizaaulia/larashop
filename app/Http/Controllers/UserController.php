@@ -56,7 +56,7 @@ class UserController extends Controller
             'roles' => 'required',
             'phone' => 'required|digits_between:10,12',
             'address' => 'required|min:10|max:200',
-            'avatar' => 'required',
+            'avatar' => 'required|image|mimes:jpeg,jpg,png',
             'email' => 'required|email',
             'password' => 'required|min:8',
             'password_confirmation' => 'required|same:password'
@@ -121,6 +121,7 @@ class UserController extends Controller
             'roles' => 'required',
             'phone' => 'required|digits_between:10,12',
             'address' => 'required|min:10|max:200',
+            'avatar' => 'image|mimes:jpeg,jpg,png'
         ])->validate();
 
         $user = \App\User::findOrFail($id);
